@@ -338,6 +338,10 @@
     .open-q-status.research { background: var(--accent-dim); color: var(--accent); }
 
     /* ── STAGE 5: בוחן ────────────────────────────────── */
+    .s5-pretitle { font-size: 0.9rem; color: var(--accent); font-weight: 700; margin-bottom: 0.4rem; }
+    .s5-title { font-size: 2rem; font-weight: 700; color: var(--text); margin-bottom: 0.5rem; }
+    .s5-sub { font-size: 0.95rem; color: var(--text-muted); margin-bottom: 1.8rem; }
+
     .s5-q { margin-bottom: 1.6rem; }
 
     .s5-q-text {
@@ -633,10 +637,10 @@
 </div>`,
 
       /* ── STAGE 5: בוחן ── */
-      `<div id="s5Root">
-  <p class="pretitle">שלב אחרון —</p>
-  <h2 class="stage-title">בוחן מסכם</h2>
-  <p class="stage-sub">5 שאלות על מה שלמדנו. בחרו תשובה אחת לכל שאלה:</p>
+      `<div class="s5" id="s5Root">
+  <p class="s5-pretitle">שלב אחרון —</p>
+  <h2 class="s5-title">בוחן מסכם</h2>
+  <p class="s5-sub">5 שאלות על מה שלמדנו. בחרו תשובה אחת לכל שאלה:</p>
 
   <div id="s5Questions"></div>
 
