@@ -1194,6 +1194,35 @@
 
     .s7-submit-btn:hover { opacity: 0.88; }
     .s7-submit-btn:disabled { opacity: 0.4; cursor: default; }
+
+    .s7-video-box {
+      margin-top: 2rem;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 1.5rem;
+      text-align: center;
+    }
+
+    .s7-video-title {
+      font-size: 1rem; font-weight: 700;
+      color: var(--accent); margin-bottom: 0.4rem;
+    }
+
+    .s7-video-sub {
+      font-size: 0.88rem; color: var(--text-muted);
+      margin-bottom: 1.2rem;
+    }
+
+    .s7-video-wrap {
+      position: relative; padding-bottom: 56.25%;
+      height: 0; overflow: hidden; border-radius: 10px;
+    }
+
+    .s7-video-wrap iframe {
+      position: absolute; top: 0; left: 0;
+      width: 100%; height: 100%; border: 0; border-radius: 10px;
+    }
   </style>
 </head>
 <body>
@@ -2082,6 +2111,13 @@
         '<button class="s7-submit-btn" onclick="s7Submit(' + s7Score + ',' + total + ')">שלח תוצאות &#x1F4E8;</button>' +
         '</div>' +
         '<button class="btn-game-start" onclick="s7Init()">נסו שוב &#x1F504;</button>' +
+        '</div>' +
+        '<div class="s7-video-box">' +
+        '<div class="s7-video-title">&#x1F3A5; רוצים לדעת עוד?</div>' +
+        '<p class="s7-video-sub">סרטון קצר ומומלץ להעשרה</p>' +
+        '<div class="s7-video-wrap">' +
+        '<iframe src="https://www.youtube.com/embed/TLt5xPefG74?si=7vTTndIUg_OQUx1A" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>' +
+        '</div>' +
         '</div>';
     }
 
