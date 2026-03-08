@@ -1,42 +1,67 @@
-# Project: לומדה אבולוציה
+# Project: לומדות אבולוציה
 
 ## What this is
-An interactive self-learning module teaching middle school students about evolution,
-with no assumed prior knowledge. Built as a standalone HTML file.
+Interactive self-learning modules teaching middle school students about evolution,
+with no assumed prior knowledge. Each module is a standalone HTML file.
 
 ## Target audience
 Middle school students, low-to-medium academic level, Hebrew speakers.
 
 ## File structure
-evolution.html     — the full module (single file, all CSS + JS inline)
-humanhand.jpg      — Gemini-generated image: human hand bones
-whalehand.jpg      — Gemini-generated image: whale flipper bones
-fossils.jpg        — Gemini-generated image: 8 labeled fossil types (used in Stage 5)
-DNA.jpg            — Gemini-generated image: DNA double helix (used in Stage 5)
-Images are saved locally in the project folder (not linked from external URLs).
+index.html            — hub/landing page (3 active module cards)
+evolution.html        — Module 1: אבולוציה (7 stages)
+coevolution.html      — Module 2: מירוץ החימוש בטבע (5 stages)
+humanevolution.html   — Module 3: אבולוציה אנושית (5 stages)
+humanhand.jpg         — Gemini-generated: human hand bones (Module 1)
+whalehand2.jpg        — Gemini-generated: whale flipper bones (Module 1)
+fossils.jpg           — Gemini-generated: 8 labeled fossil types (Module 1, Stage 5)
+DNA.jpg               — Gemini-generated: DNA double helix (Module 1, Stage 5)
 
 ## Design system
-Font:       Alef (Google Fonts)
-Theme:      Dark, modern, focused
-Background: #0d1117
-Accent:     #4ade80 (green — life/nature theme)
-Direction:  RTL, Hebrew
+Font:         Alef (Google Fonts)
+Theme:        Dark, modern, focused
+Background:   #0d1117
+Module 1:     accent #4ade80 (green)
+Module 2:     accent #f59e0b (amber)
+Module 3:     accent #60a5fa (blue)
+Direction:    RTL, Hebrew
 
-## Stage structure (7 stages)
-1. מבוא          ✅ hook question + vote + bone images (humanhand.jpg, whalehand.jpg)
-2. ברירה טבעית   ✅ definition + concept cards + beetle survival game (4 rounds, timer, history chart)
-3. תורשה         ✅ definition + concept cards + heredity lab (beetle mixer, mutations)
-4. הזמן הגדול    ✅ scale cards + 8-event clickable timeline + final scale bar
-5. ראיות         ✅ 4 click-to-reveal evidence cards (fossils, DNA, vestigial, real-time evolution)
-6. דוגמאות       ✅ 4-card gallery slider (dogs, Darwin's finches, whale, bacteria)
-7. בוחן          ✅ 6-question multiple choice quiz, shuffled answers, score screen
+## Module 1 — אבולוציה ✅ (live on Vercel)
+1. מבוא          ✅ hook question + vote + bone images
+2. ברירה טבעית   ✅ beetle survival game (4 rounds, timer, bar chart)
+3. תורשה         ✅ heredity lab (beetle mixer, mutations)
+4. הזמן הגדול    ✅ scale cards + 8-event timeline + scale bar
+5. ראיות         ✅ 4 click-to-reveal evidence cards
+6. דוגמאות       ✅ 4-card gallery slider
+7. בוחן          ✅ 6-question MCQ + Google Forms submission
+                    (name + class + score; entry IDs: 1688849251 / 1737489614 / 2011009170)
 
-## Pending
-- Teacher submission feature: students submit name + score to Google Classroom at end of quiz.
-  Planned approach: Google Forms pre-fill URL (teacher creates form, shares edit link,
-  field IDs extracted and baked into HTML). Waiting for teacher to create the form.
+## Module 2 — מירוץ החימוש בטבע ✅ (complete locally, not pushed yet)
+1. מבוא          ✅ cheetah/deer vote + arms race cycle diagram
+2. טורף ונטרף    ✅ 3 predator-prey cards with real Wikimedia photos
+3. הסוואה וחיקוי ✅ stick insect reveal game + octopus GIF + monarch/viceroy pair
+4. שיתוף פעולה   ✅ bee orchid, fig wasp, birds+fruit cards
+5. בוחן          ✅ 5 MCQ + Google Forms submission
+                    (name=1662845623, class=1846907217, score=1990643179)
 
-## Images
-- Use Gemini to generate illustrations when needed, or search for free scientific images
-- Save locally in project folder, reference with relative paths
-- Add scientific source credit in captions where relevant
+## Module 3 — אבולוציה אנושית ✅ (complete locally, not pushed yet)
+1. מבוא          ✅ vote "מה ההבדל בינינו לבין שימפנזה?" + chimp photo + DNA comparison cards
+2. עץ המשפחה    ✅ interactive 4-node timeline (Australopithecus → habilis → erectus → sapiens)
+3. מה הפך אותנו לאנושיים? ✅ cave art image + 4 cards (שפה, אש, כלים, שיתוף פעולה)
+4. ניאנדרתלים    ✅ reconstruction photo + 3 cards + DNA surprise box (2–4%)
+5. בוחן          ✅ 6 MCQ + Google Forms submission
+                    (name=1753846366, class=240948921, score=923537609)
+
+## Planned modules (ideas)
+- Module 4: ויכוחים ואתגרים (controversies in evolution)
+- More ideas TBD
+
+## Images policy
+- Module 1: locally saved images (relative paths)
+- Module 2+: real photos linked directly from Wikimedia Commons, Pixnio, Giphy etc.
+- No Gemini-generated animal images for Module 2+
+- Always verify image URLs before using (request direct link from user if unsure)
+
+## Git
+Repo: https://github.com/niroari/evolution
+Push only when user confirms (modules 2 and 3 not yet pushed)
