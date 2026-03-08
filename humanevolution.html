@@ -446,104 +446,72 @@
 
     /* ── STAGE 5: בוחן ────────────────────────────────── */
     .s5-pretitle { font-size: 0.9rem; color: var(--accent); font-weight: 700; margin-bottom: 0.4rem; }
+    .s5-title { font-size: 2rem; font-weight: 700; color: var(--text); margin-bottom: 1.5rem; }
 
-    .s5-title { font-size: 2rem; font-weight: 700; color: var(--text); margin-bottom: 0.5rem; }
+    .s5-progress-wrap { margin-bottom: 1.8rem; }
+    .s5-progress-info { display: flex; justify-content: space-between; font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.5rem; }
+    .s5-progress-bar { height: 6px; background: var(--surface-2); border-radius: 4px; overflow: hidden; }
+    .s5-progress-fill { height: 100%; background: var(--accent); border-radius: 4px; transition: width 0.4s ease; }
 
-    .s5-sub { font-size: 0.95rem; color: var(--text-muted); margin-bottom: 1.8rem; }
-
-    .s5-q { margin-bottom: 1.6rem; }
-
-    .s5-q-text {
-      font-size: 1rem; font-weight: 700; color: var(--text);
-      margin-bottom: 0.8rem; line-height: 1.5;
+    .s5-question-card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 14px; padding: 1.8rem; margin-bottom: 1rem;
+      animation: fadeInUp 0.35s ease;
     }
-
-    .s5-options { display: flex; flex-direction: column; gap: 0.5rem; }
-
-    .s5-opt {
-      width: 100%; background: var(--surface);
+    .s5-question-text { font-size: 1.15rem; font-weight: 700; color: var(--text); line-height: 1.6; margin-bottom: 1.5rem; }
+    .s5-answers { display: flex; flex-direction: column; gap: 0.7rem; }
+    .s5-answer-btn {
+      width: 100%; background: var(--surface-2);
       border: 2px solid var(--border); border-radius: 10px;
-      padding: 0.75rem 1rem; font-family: 'Alef', sans-serif;
+      padding: 0.9rem 1.2rem; font-family: 'Alef', sans-serif;
       font-size: 0.95rem; color: var(--text); cursor: pointer;
       text-align: right; direction: rtl;
-      transition: border-color 0.15s, background 0.15s;
+      transition: border-color 0.2s, background 0.2s;
     }
+    .s5-answer-btn:hover:not(:disabled) { border-color: var(--accent); }
+    .s5-answer-btn.correct { border-color: #4ade80; background: #052e16; color: #4ade80; }
+    .s5-answer-btn.wrong   { border-color: #f87171; background: #2d0f0f; color: #f87171; }
+    .s5-answer-btn:disabled { cursor: default; }
 
-    .s5-opt:hover:not(:disabled) { border-color: var(--accent); background: var(--surface-2); }
-    .s5-opt.correct  { border-color: #4ade80; background: #052e16; color: #4ade80; }
-    .s5-opt.wrong    { border-color: #f87171; background: #2d0f0f; color: #f87171; }
-    .s5-opt:disabled { cursor: default; }
+    .s5-explanation { border-radius: 10px; padding: 0.8rem 1rem; margin-top: 1rem; font-size: 0.9rem; font-weight: 700; }
+    .s5-explanation.ok { color: #4ade80; }
+    .s5-explanation.no { color: #f87171; }
 
-    .s5-feedback {
-      font-size: 0.85rem; margin-top: 0.5rem; padding: 0.4rem 0.6rem;
-      border-radius: 6px; display: none;
-    }
-
-    .s5-feedback.show { display: block; }
-    .s5-feedback.ok  { color: #4ade80; }
-    .s5-feedback.no  { color: #f87171; }
-
-    .s5-submit-wrap { text-align: center; margin: 1.5rem 0 0.5rem; }
-
-    .s5-submit {
+    .s5-next-wrap { text-align: center; margin-top: 1rem; animation: fadeInUp 0.3s ease; }
+    .s5-next-btn {
       background: var(--accent); color: #0d1117;
-      border: none; padding: 0.85rem 2.8rem;
-      font-size: 1.1rem; font-family: 'Alef', sans-serif;
+      border: none; padding: 0.85rem 2.4rem;
+      font-size: 1rem; font-family: 'Alef', sans-serif;
       font-weight: 700; border-radius: 50px; cursor: pointer;
       transition: opacity 0.2s;
     }
+    .s5-next-btn:hover { opacity: 0.88; }
 
-    .s5-submit:hover { opacity: 0.88; }
-    .s5-submit:disabled { opacity: 0.35; cursor: default; }
-
-    /* score screen */
-    .s5-score {
-      text-align: center; padding: 1rem 0;
-      animation: fadeInUp 0.5s ease;
-    }
-
+    .s5-score { text-align: center; animation: fadeInUp 0.5s ease; padding: 1rem 0; }
     .s5-score-emoji { font-size: 4rem; margin-bottom: 1rem; display: block; }
-
-    .s5-score-num {
-      font-size: 3.5rem; font-weight: 700; color: var(--accent);
-      line-height: 1; margin-bottom: 0.4rem;
-    }
-
+    .s5-score-num { font-size: 3.5rem; font-weight: 700; color: var(--accent); line-height: 1; margin-bottom: 0.4rem; }
     .s5-score-label { font-size: 1rem; color: var(--text-muted); margin-bottom: 1.5rem; }
 
     .s5-name-form {
       background: var(--surface); border: 1px solid var(--border);
       border-radius: 14px; padding: 1.4rem; text-align: right; margin-bottom: 1rem;
     }
-
-    .s5-name-form label {
-      display: block; font-size: 0.9rem; color: var(--text-muted);
-      margin-bottom: 0.4rem; font-weight: 700;
-    }
-
+    .s5-name-form label { display: block; font-size: 0.9rem; color: var(--text-muted); margin-bottom: 0.4rem; font-weight: 700; }
     .s5-name-form input {
       width: 100%; background: var(--surface-2); border: 1px solid var(--border);
       border-radius: 8px; padding: 0.65rem 0.9rem;
       font-family: 'Alef', sans-serif; font-size: 1rem; color: var(--text);
       direction: rtl; margin-bottom: 0.9rem;
     }
-
     .s5-name-form input:focus { outline: none; border-color: var(--accent); }
-
     .s5-send {
       width: 100%; background: var(--accent); color: #0d1117;
       border: none; padding: 0.8rem; font-size: 1rem;
       font-family: 'Alef', sans-serif; font-weight: 700;
       border-radius: 10px; cursor: pointer; transition: opacity 0.2s;
     }
-
     .s5-send:hover { opacity: 0.88; }
-
-    .s5-sent {
-      background: #052e16; border: 1px solid #4ade80;
-      border-radius: 10px; padding: 1rem;
-      color: #4ade80; font-size: 0.95rem; text-align: center;
-    }
+    .s5-sent { background: #052e16; border: 1px solid #4ade80; border-radius: 10px; padding: 1rem; color: #4ade80; font-size: 0.95rem; text-align: center; }
 
     .video-section { margin-top: 2rem; text-align: center; }
     .video-title { font-size: 1.1rem; font-weight: 700; color: var(--text); margin-bottom: 0.3rem; }
@@ -808,15 +776,7 @@
       `<div class="s5" id="s5Root">
   <p class="s5-pretitle">שלב אחרון —</p>
   <h2 class="s5-title">בוחן מסכם</h2>
-  <p class="s5-sub">6 שאלות על מה שלמדנו. בחרו תשובה אחת לכל שאלה:</p>
-
-  <div id="s5Questions"></div>
-
-  <div class="s5-submit-wrap">
-    <button class="s5-submit" id="s5SubmitBtn" onclick="s5Submit()" disabled>הגישו תשובות</button>
-  </div>
-
-  <div id="s5Score" class="hidden"></div>
+  <div id="s5Content"></div>
 </div>`,
     ];
 
@@ -905,74 +865,102 @@
       },
     ];
 
-    let s5Answers = new Array(S5_QS.length).fill(null);
+    let s5Current = 0;
+    let s5Score = 0;
+    let s5Answered = false;
 
     function s5Init() {
-      s5Answers = new Array(S5_QS.length).fill(null);
-      const container = document.getElementById('s5Questions');
-      if (!container) return;
-      container.innerHTML = S5_QS.map((q, qi) => `
-        <div class="s5-q" id="s5q${qi}">
-          <div class="s5-q-text">${qi + 1}. ${q.q}</div>
-          <div class="s5-options">
-            ${q.opts.map((o, oi) => `
-              <button class="s5-opt" onclick="s5Pick(${qi},${oi})">${o}</button>
-            `).join('')}
-          </div>
-          <div class="s5-feedback" id="s5fb${qi}"></div>
-        </div>
-      `).join('');
-      document.getElementById('s5Score').classList.add('hidden');
-      document.getElementById('s5SubmitBtn').disabled = true;
+      s5Current = 0;
+      s5Score = 0;
+      s5Answered = false;
+      s5ShowQuestion();
     }
 
-    function s5Pick(qi, oi) {
-      const q = S5_QS[qi];
-      const opts = document.querySelectorAll(`#s5q${qi} .s5-opt`);
-      opts.forEach(b => b.disabled = true);
-      opts[oi].classList.add(oi === q.ans ? 'correct' : 'wrong');
-      if (oi !== q.ans) opts[q.ans].classList.add('correct');
-      const fb = document.getElementById(`s5fb${qi}`);
-      fb.classList.add('show', oi === q.ans ? 'ok' : 'no');
-      fb.textContent = oi === q.ans ? '✓ נכון!' : '✗ לא נכון';
-      s5Answers[qi] = oi;
-      if (s5Answers.every(a => a !== null)) {
-        document.getElementById('s5SubmitBtn').disabled = false;
+    function s5ShowQuestion() {
+      const el = document.getElementById('s5Content');
+      if (!el) return;
+      s5Answered = false;
+      const q = S5_QS[s5Current];
+      const pct = (s5Current / S5_QS.length) * 100;
+      const isLast = s5Current === S5_QS.length - 1;
+      let optsHTML = '';
+      q.opts.forEach((o, oi) => {
+        optsHTML += '<button class="s5-answer-btn" onclick="s5Answer(this,' + oi + ',' + q.ans + ')">' + o + '</button>';
+      });
+      el.innerHTML =
+        '<div class="s5-progress-wrap">' +
+          '<div class="s5-progress-info">' +
+            '<span>שאלה ' + (s5Current + 1) + ' מתוך ' + S5_QS.length + '</span>' +
+            '<span>' + s5Score + ' נכון עד כה</span>' +
+          '</div>' +
+          '<div class="s5-progress-bar"><div class="s5-progress-fill" style="width:' + pct + '%"></div></div>' +
+        '</div>' +
+        '<div class="s5-question-card">' +
+          '<div class="s5-question-text">' + q.q + '</div>' +
+          '<div class="s5-answers">' + optsHTML + '</div>' +
+          '<div class="s5-explanation hidden" id="s5Explanation"></div>' +
+        '</div>' +
+        '<div class="s5-next-wrap hidden" id="s5NextWrap">' +
+          '<button class="s5-next-btn" onclick="s5Next()">' + (isLast ? 'לתוצאות 🏆' : 'השאלה הבאה ←') + '</button>' +
+        '</div>';
+    }
+
+    function s5Answer(btn, chosen, correct) {
+      if (s5Answered) return;
+      s5Answered = true;
+      const allBtns = document.querySelectorAll('.s5-answer-btn');
+      allBtns.forEach(b => b.disabled = true);
+      if (chosen === correct) {
+        btn.classList.add('correct');
+        s5Score++;
+      } else {
+        btn.classList.add('wrong');
+        allBtns[correct].classList.add('correct');
+      }
+      const expEl = document.getElementById('s5Explanation');
+      if (expEl) {
+        expEl.textContent = chosen === correct ? '✓ נכון!' : '✗ לא נכון';
+        expEl.className = 's5-explanation ' + (chosen === correct ? 'ok' : 'no');
+      }
+      document.getElementById('s5NextWrap').classList.remove('hidden');
+    }
+
+    function s5Next() {
+      s5Current++;
+      if (s5Current >= S5_QS.length) {
+        s5ShowScore();
+      } else {
+        s5ShowQuestion();
       }
     }
 
-    function s5Submit() {
-      const score = s5Answers.filter((a, i) => a === S5_QS[i].ans).length;
+    function s5ShowScore() {
+      const el = document.getElementById('s5Content');
+      if (!el) return;
       const total = S5_QS.length;
-      document.getElementById('s5SubmitBtn').style.display = 'none';
-      const emoji = score === total ? '🏆' : score >= total * 0.7 ? '🌟' : '💪';
-      const scoreEl = document.getElementById('s5Score');
-      scoreEl.classList.remove('hidden');
-      scoreEl.innerHTML = `
-        <div class="s5-score">
-          <span class="s5-score-emoji">${emoji}</span>
-          <div class="s5-score-num">${score}/${total}</div>
-          <div class="s5-score-label">
-            ${score === total ? 'מושלם! שלטת בכל החומר' :
-              score >= total * 0.7 ? 'כל הכבוד! ידע מרשים' :
-              'כדאי לחזור על החומר ולנסות שוב'}
-          </div>
-          <div class="s5-name-form" id="s5Form">
-            <label>שם פרטי ושם משפחה:</label>
-            <input type="text" id="s5Name" placeholder="למשל: ישראל ישראלי" />
-            <label>כיתה:</label>
-            <input type="text" id="s5Class" placeholder="למשל: ז׳2" />
-            <button class="s5-send" onclick="s5Send(${score}, ${total})">שלחו תוצאה ←</button>
-          </div>
-          <div class="video-section">
-            <div class="video-title">🎥 רוצים לדעת עוד?</div>
-            <p class="video-sub">סרטון קצר ומומלץ להעשרה</p>
-            <p class="video-note">⚠️ הסרטון באנגלית — מיועד להעשרה בלבד</p>
-            <a class="video-link-btn" href="https://www.youtube.com/watch?v=DZv8VyIQ7YU" target="_blank" rel="noopener">▶ צפו בסרטון ב-YouTube</a>
-          </div>
-        </div>
-      `;
-      setTimeout(() => scoreEl.scrollIntoView({ behavior: 'smooth', block: 'start' }), 100);
+      const emoji = s5Score === total ? '🏆' : s5Score >= total * 0.7 ? '🌟' : '💪';
+      const label = s5Score === total ? 'מושלם! שלטת בכל החומר' :
+        s5Score >= total * 0.7 ? 'כל הכבוד! ידע מרשים' : 'כדאי לחזור על החומר ולנסות שוב';
+      el.innerHTML =
+        '<div class="s5-score">' +
+          '<span class="s5-score-emoji">' + emoji + '</span>' +
+          '<div class="s5-score-num">' + s5Score + '/' + total + '</div>' +
+          '<div class="s5-score-label">' + label + '</div>' +
+          '<div class="s5-name-form" id="s5Form">' +
+            '<label>שם פרטי ושם משפחה:</label>' +
+            '<input type="text" id="s5Name" placeholder="למשל: ישראל ישראלי" />' +
+            '<label>כיתה:</label>' +
+            '<input type="text" id="s5Class" placeholder=\'למשל: ז\u05f32\' />' +
+            '<button class="s5-send" onclick="s5Send(' + s5Score + ',' + total + ')">שלחו תוצאה ←</button>' +
+          '</div>' +
+          '<div class="video-section">' +
+            '<div class="video-title">🎥 רוצים לדעת עוד?</div>' +
+            '<p class="video-sub">סרטון קצר ומומלץ להעשרה</p>' +
+            '<p class="video-note">⚠️ הסרטון באנגלית — מיועד להעשרה בלבד</p>' +
+            '<a class="video-link-btn" href="https://www.youtube.com/watch?v=DZv8VyIQ7YU" target="_blank" rel="noopener">▶ צפו בסרטון ב-YouTube</a>' +
+          '</div>' +
+        '</div>';
+      setTimeout(() => el.scrollIntoView({ behavior: 'smooth', block: 'start' }), 100);
     }
 
     function s5Send(score, total) {
