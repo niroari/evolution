@@ -279,7 +279,18 @@
       background: var(--surface-2); border: 1px solid var(--border);
       border-radius: 20px; padding: 0.4rem 0.9rem;
       font-size: 0.85rem; color: var(--text-muted);
+      cursor: pointer; transition: border-color 0.2s, color 0.2s;
     }
+    .theory-chip:hover { border-color: var(--accent); color: var(--text); }
+    .theory-chip.active { border-color: var(--accent); color: var(--accent); }
+    .theory-explain {
+      display: none; width: 100%;
+      background: var(--surface-2); border: 1px solid var(--border);
+      border-radius: 12px; padding: 0.75rem 1rem;
+      font-size: 0.85rem; color: var(--text); line-height: 1.6;
+      margin-top: 0.2rem;
+    }
+    .theory-explain.visible { display: block; }
 
     /* ── STAGE 3: דת ומדע ─────────────────────────────── */
     .opinion-card {
@@ -512,10 +523,14 @@
 
   <p style="font-size:0.9rem;color:var(--text-muted);margin-bottom:0.6rem;font-weight:700">עוד "תיאוריות" מדעיות — שאף אחד לא מפקפק בהן:</p>
   <div class="theory-examples">
-    <span class="theory-chip">🍎 תיאוריית הגרביטציה</span>
-    <span class="theory-chip">🦠 תיאוריית הנבט (חיידקים גורמים למחלות)</span>
-    <span class="theory-chip">⚛️ תיאוריה האטומית</span>
-    <span class="theory-chip">🌍 תיאוריית הטקטוניקה של הלוחות</span>
+    <span class="theory-chip" onclick="toggleTheory('gravity')">🍎 תיאוריית הגרביטציה</span>
+    <span class="theory-chip" onclick="toggleTheory('germ')">🦠 תיאוריית הנבט (חיידקים גורמים למחלות)</span>
+    <span class="theory-chip" onclick="toggleTheory('atom')">⚛️ תיאוריה האטומית</span>
+    <span class="theory-chip" onclick="toggleTheory('tectonic')">🌍 תיאוריית הטקטוניקה של הלוחות</span>
+    <div class="theory-explain" id="explain-gravity">גרביטציה היא הכוח שמושך עצמים זה לזה. תיאוריית הגרביטציה, שפותחה על ידי ניוטון ושוכללה על ידי איינשטיין, מסבירה למה תפוחים נופלים, למה כדור הארץ מקיף את השמש, ולמה הירח לא מתרחק לחלל — ועמדה במאות שנות בדיקה.</div>
+    <div class="theory-explain" id="explain-germ">תיאוריית הנבט קובעת שמחלות זיהומיות נגרמות על ידי מיקרואורגניזמים — חיידקים, וירוסים ופטריות. פותחה בשנות ה-1860 על ידי לואי פסטר וקרל קוך, והיא הבסיס של כל הרפואה המודרנית: אנטיביוטיקה, חיסונים, סטריליזציה.</div>
+    <div class="theory-explain" id="explain-atom">התיאוריה האטומית קובעת שכל החומר בעולם בנוי מחלקיקים זעירים הנקראים אטומים. מדענים כמו דלטון, ראת'רפורד ובּוֹר בנו אותה לאורך המאה ה-19 וה-20. היא הבסיס לכימיה, לפיזיקה ולכל הטכנולוגיה המודרנית.</div>
+    <div class="theory-explain" id="explain-tectonic">תיאוריית הטקטוניקה של הלוחות קובעת שקרום כדור הארץ מחולק ל"לוחות" ענקיים שזזים לאט. התיאוריה הוצעה בראשית המאה ה-20 על ידי אלפרד וגנר ואושרה בשנות ה-60 בראיות ממצע האוקיינוס. היא מסבירה רעידות אדמה, התפרצויות געש והיווצרות הרים.</div>
   </div>
 
   <div class="highlight-box">
@@ -787,6 +802,23 @@
       buildProgressBar();
       window.scrollTo({ top: 0, behavior: 'smooth' });
       if (current === 4) setTimeout(s5Init, 0);
+    }
+
+    function toggleTheory(id) {
+      const box = document.getElementById('explain-' + id);
+      const chip = box.previousElementSibling;
+      // find the chip that called this (by scanning siblings)
+      const allChips = box.parentElement.querySelectorAll('.theory-chip');
+      const allBoxes = box.parentElement.querySelectorAll('.theory-explain');
+      const isOpen = box.classList.contains('visible');
+      allBoxes.forEach(b => b.classList.remove('visible'));
+      allChips.forEach(c => c.classList.remove('active'));
+      if (!isOpen) {
+        box.classList.add('visible');
+        // mark the chip active
+        const chips = { gravity: 0, germ: 1, atom: 2, tectonic: 3 };
+        allChips[chips[id]].classList.add('active');
+      }
     }
 
     function startLearning() {
