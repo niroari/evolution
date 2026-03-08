@@ -2107,7 +2107,8 @@
         '<div class="s7-score-message">' + message + '</div>' +
         '<div class="s7-submit-box">' +
         '<p class="s7-submit-label">שלחו את התוצאות למורה:</p>' +
-        '<input class="s7-name-input" id="s7NameInput" type="text" placeholder="הכניסו את שמכם המלא" />' +
+        '<input class="s7-name-input" id="s7NameInput" type="text" placeholder="שם מלא" style="margin-bottom:0.7rem" />' +
+        '<input class="s7-name-input" id="s7ClassInput" type="text" placeholder="כיתה (למשל: ח2)" />' +
         '<button class="s7-submit-btn" onclick="s7Submit(' + s7Score + ',' + total + ')">שלח תוצאות &#x1F4E8;</button>' +
         '</div>' +
         '<button class="btn-game-start" onclick="s7Init()">נסו שוב &#x1F504;</button>' +
@@ -2122,18 +2123,24 @@
     }
 
     function s7Submit(score, total) {
-      const nameInput = document.getElementById('s7NameInput');
-      const name = nameInput ? nameInput.value.trim() : '';
+      const nameInput  = document.getElementById('s7NameInput');
+      const classInput = document.getElementById('s7ClassInput');
+      const name  = nameInput  ? nameInput.value.trim()  : '';
+      const klass = classInput ? classInput.value.trim() : '';
       if (!name) {
         nameInput.style.borderColor = '#ef4444';
         nameInput.placeholder = 'נא להכניס שם לפני השליחה';
         return;
       }
-      const scoreStr = encodeURIComponent(score + '/' + total);
-      const nameStr  = encodeURIComponent(name);
+      if (!klass) {
+        classInput.style.borderColor = '#ef4444';
+        classInput.placeholder = 'נא להכניס כיתה לפני השליחה';
+        return;
+      }
       const url = 'https://docs.google.com/forms/d/e/1FAIpQLSfcNX2yx_YvpivGRmLOTMAUncmTMuN8KlcoGR1jSN6nUJY4Ow/viewform?usp=pp_url' +
-        '&entry.1688849251=' + nameStr +
-        '&entry.2011009170=' + scoreStr;
+        '&entry.1688849251=' + encodeURIComponent(name) +
+        '&entry.1737489614=' + encodeURIComponent(klass) +
+        '&entry.2011009170=' + encodeURIComponent(score + '/' + total);
       window.open(url, '_blank');
       const btn = document.querySelector('.s7-submit-btn');
       if (btn) { btn.textContent = 'נשלח! ✓'; btn.disabled = true; }
