@@ -337,6 +337,30 @@
       content: '›'; color: var(--accent); font-weight: 700; flex-shrink: 0; margin-top: 0.05rem;
     }
 
+    .anc-facts li.lucy-fact { cursor: pointer; flex-direction: column; gap: 0; }
+    .anc-facts li.lucy-fact .lucy-row {
+      display: flex; gap: 0.7rem; align-items: flex-start; width: 100%;
+    }
+    .anc-facts li.lucy-fact .lucy-row::before {
+      content: '›'; color: var(--accent); font-weight: 700; flex-shrink: 0; margin-top: 0.05rem;
+    }
+    .anc-facts li.lucy-fact:hover .lucy-label { color: var(--accent); }
+    .lucy-toggle-hint {
+      font-size: 0.78rem; color: var(--accent); opacity: 0.7;
+      margin-right: 0.3rem;
+    }
+    .lucy-expand {
+      display: none; margin-top: 0.8rem; padding: 1rem;
+      background: var(--surface-2); border-radius: 10px;
+      animation: fadeInUp 0.3s ease;
+    }
+    .lucy-expand.open { display: block; }
+    .lucy-expand p { font-size: 0.88rem; color: var(--text-muted); line-height: 1.7; margin-bottom: 0.9rem; }
+    .lucy-imgs { display: flex; gap: 0.8rem; }
+    .lucy-img-wrap { flex: 1; text-align: center; }
+    .lucy-img-wrap img { width: 100%; border-radius: 8px; object-fit: cover; max-height: 180px; }
+    .lucy-img-wrap span { font-size: 0.75rem; color: var(--text-muted); display: block; margin-top: 0.3rem; }
+
     .anc-hint {
       text-align: center; padding: 2rem 1rem;
       color: var(--text-muted); font-size: 0.95rem; font-style: italic;
@@ -1064,10 +1088,35 @@
           <div class="anc-stat"><strong>גודל מוח</strong>${a.brain}</div>
         </div>
         <ul class="anc-facts">
-          ${a.facts.map(f => `<li>${f}</li>`).join('')}
+          ${a.facts.map(f => f.includes('לוסי') ? `
+            <li class="lucy-fact" onclick="toggleLucy()">
+              <div class="lucy-row">
+                <span class="lucy-label">${f}</span>
+                <span class="lucy-toggle-hint">← לחצו לפרטים</span>
+              </div>
+              <div class="lucy-expand" id="lucyExpand">
+                <p>לוסי התגלתה ב-1974 באתיופיה על ידי הפלאואנתרופולוג דונלד ג'והנסון. השלד שלה הוא מהשלמים ביותר שנמצאו — כ-40% מהעצמות שרדו. לוסי עמדה על גובה של כ-1.1 מטר ושקלה כ-29 ק"ג. ניתוח עצמות הרגליים והאגן הוכיח שהיא הלכה על שתיים — אך ידיה הארוכות מראות שעדיין טיפסה על עצים.</p>
+                <div class="lucy-imgs">
+                  <div class="lucy-img-wrap">
+                    <img src="https://www.nhm.ac.uk/content/dam/nhm-www/discover/human-evolution/australopithecus-afarensis/lucy-cast-on-black-two-column.jpg.thumb.1920.1920.png" alt="שלד לוסי" />
+                    <span>תבנית השלד המקורי</span>
+                  </div>
+                  <div class="lucy-img-wrap">
+                    <img src="https://media.sciencephoto.com/c0/54/63/24/c0546324-800px-wm.jpg" alt="שחזור לוסי" />
+                    <span>שחזור מראה לוסי</span>
+                  </div>
+                </div>
+              </div>
+            </li>` : `<li>${f}</li>`).join('')}
         </ul>
       `;
       setTimeout(() => det.scrollIntoView({ behavior: 'smooth', block: 'nearest' }), 100);
+    }
+
+    function toggleLucy() {
+      const el = document.getElementById('lucyExpand');
+      if (!el) return;
+      el.classList.toggle('open');
     }
 
     /* ── STAGE 1 ─────────────────────────────────────── */
