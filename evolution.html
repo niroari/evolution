@@ -455,6 +455,27 @@
       font-style: italic;
     }
 
+    .s1-feedback {
+      margin-top: 1.2rem;
+      padding: 0.9rem 1.4rem;
+      border-radius: 10px;
+      font-size: 1rem;
+      font-weight: 700;
+      animation: fadeInUp 0.3s ease;
+    }
+
+    .s1-feedback.correct {
+      background: rgba(74, 222, 128, 0.12);
+      border: 1px solid var(--accent);
+      color: var(--accent);
+    }
+
+    .s1-feedback.wrong {
+      background: rgba(248, 113, 113, 0.1);
+      border: 1px solid #f87171;
+      color: #f87171;
+    }
+
     /* ── STAGE 2: ברירה טבעית ───────────────────────── */
     .s2-intro { margin-bottom: 2.5rem; }
 
@@ -1273,9 +1294,11 @@
   <h2 class="s1-title">האם לוויתן קרוב משפחה שלך?</h2>
   <p class="s1-sub">נשמע מוזר? בחרו את התשובה שלכם:</p>
   <div class="s1-votes">
-    <button class="vote-btn" onclick="s1Vote(this)">כן, בהחלט 🐋</button>
-    <button class="vote-btn" onclick="s1Vote(this)">לא נראה לי 🙅</button>
+    <button class="vote-btn" data-answer="correct" onclick="s1Vote(this)">כן, בהחלט 🐋</button>
+    <button class="vote-btn" data-answer="wrong" onclick="s1Vote(this)">לא נראה לי 🙅</button>
   </div>
+
+  <div class="s1-feedback" id="s1Feedback" style="display:none"></div>
 
   <div class="s1-reveal" id="s1Reveal" style="display:none">
     <span class="reveal-tag">התשובה המדהימה:</span>
@@ -2301,6 +2324,17 @@
       });
       btn.style.opacity = '1';
       btn.classList.add('chosen');
+
+      const feedback = document.getElementById('s1Feedback');
+      if (btn.dataset.answer === 'correct') {
+        feedback.className = 's1-feedback correct';
+        feedback.textContent = '✓ נכון! לוויתן הוא אכן קרוב משפחה שלנו — עוד תגלו כמה זה מוזר 🐋';
+      } else {
+        feedback.className = 's1-feedback wrong';
+        feedback.textContent = '✗ לא בדיוק — אבל ההפתעה גדולה ממה שציפיתם. תראו למטה 👇';
+      }
+      feedback.style.display = 'block';
+
       const reveal = document.getElementById('s1Reveal');
       reveal.style.display = 'block';
       setTimeout(() => reveal.scrollIntoView({ behavior: 'smooth', block: 'nearest' }), 100);
