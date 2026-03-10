@@ -1042,6 +1042,25 @@
     .s5-card-body p { font-size: 0.9rem; color: var(--text-muted); line-height: 1.7; }
     .s5-card-body strong { color: var(--text); }
 
+    .s5-video-link {
+      display: inline-block;
+      margin-top: 0.9rem;
+      padding: 0.45rem 1rem;
+      border-radius: 6px;
+      border: 1px solid var(--accent-dim);
+      background: rgba(74, 222, 128, 0.07);
+      color: var(--accent);
+      font-size: 0.85rem;
+      font-family: 'Alef', sans-serif;
+      text-decoration: none;
+      transition: background 0.2s, border-color 0.2s;
+    }
+
+    .s5-video-link:hover {
+      background: rgba(74, 222, 128, 0.15);
+      border-color: var(--accent);
+    }
+
     .s5-summary {
       background: var(--surface); border: 1px solid var(--accent-dim);
       border-radius: 12px; padding: 1.8rem;
@@ -2303,22 +2322,26 @@
       {
         title: 'מאובנים',
         img: 'fossils.jpg',
-        text: '<strong>מאובנים הם שרידים של יצורים שחיו לפני מיליוני שנים.</strong> הם ממפים את עץ החיים בדיוק מדהים — ומראים כיצד מינים השתנו בהדרגה לאורך הזמן. ככל שחופרים עמוק יותר, מוצאים יצורים פשוטים יותר — בדיוק כפי שהתיאוריה מנבאת.'
+        text: '<strong>מאובנים הם שרידים של יצורים שחיו לפני מיליוני שנים.</strong> הם ממפים את עץ החיים בדיוק מדהים — ומראים כיצד מינים השתנו בהדרגה לאורך הזמן. ככל שחופרים עמוק יותר, מוצאים יצורים פשוטים יותר — בדיוק כפי שהתיאוריה מנבאת.',
+        video: 'https://www.youtube.com/watch?v=bRuSmxJo_iA'
       },
       {
         title: 'DNA משותף',
         img: 'DNA.jpg',
-        text: '<strong>כל יצור חי על פני כדור הארץ משתמש באותה שפת DNA.</strong> ככל שמינים קרובים יותר, ה-DNA שלהם דומה יותר. אנחנו חולקים 98.8% DNA עם שימפנזה — ו-60% עם בננה! זה בלתי אפשרי להסביר בלי מוצא משותף.'
+        text: '<strong>כל יצור חי על פני כדור הארץ משתמש באותה שפת DNA.</strong> ככל שמינים קרובים יותר, ה-DNA שלהם דומה יותר. אנחנו חולקים 98.8% DNA עם שימפנזה — ו-60% עם בננה! זה בלתי אפשרי להסביר בלי מוצא משותף.',
+        video: 'https://www.youtube.com/watch?v=zwibgNGe4aY'
       },
       {
         title: 'מבנים שאריתיים',
         img: null,
-        text: '<strong>גופנו נושא שאריות של איברים שהיו שימושיים אצל אבותינו.</strong> עצם הזנב הקטנה שלנו (הקוקסיקס), שרירים שמזיזים את האוזן — שימושיים לחיות שצריכות לכוון אוזניים — ואפילו שרירי זקירת שערות בזמן קור. כולם עדות לעבר אחר.'
+        text: '<strong>גופנו נושא שאריות של איברים שהיו שימושיים אצל אבותינו.</strong> עצם הזנב הקטנה שלנו (הקוקסיקס), שרירים שמזיזים את האוזן — שימושיים לחיות שצריכות לכוון אוזניים — ואפילו שרירי זקירת שערות בזמן קור. כולם עדות לעבר אחר.',
+        video: 'https://www.youtube.com/watch?v=UHbcjzkjG0o'
       },
       {
         title: 'אבולוציה בזמן אמת',
         img: null,
-        text: '<strong>אפשר לראות אבולוציה קורה ממש היום.</strong> חיידקים מפתחים עמידות לאנטיביוטיקה מדור לדור. עכברבושים בניו יורק הסתגלו לאוכל עירוני. פרפרים החשיכו בצבעם ליד מפעלי פחם כדי להיטמע ברקע. ברירה טבעית — בפעולה.'
+        text: '<strong>אפשר לראות אבולוציה קורה ממש היום.</strong> חיידקים מפתחים עמידות לאנטיביוטיקה מדור לדור. עכברבושים בניו יורק הסתגלו לאוכל עירוני. פרפרים החשיכו בצבעם ליד מפעלי פחם כדי להיטמע ברקע. ברירה טבעית — בפעולה.',
+        video: 'https://www.youtube.com/watch?v=V9ZFMoh3hJk'
       }
     ];
 
@@ -2360,6 +2383,15 @@
       const p = document.createElement('p');
       p.innerHTML = data.text;
       body.appendChild(p);
+      if (data.video) {
+        const a = document.createElement('a');
+        a.href = data.video;
+        a.target = '_blank';
+        a.rel = 'noopener noreferrer';
+        a.className = 's5-video-link';
+        a.textContent = '▶ צפו בסרטון להרחבה';
+        body.appendChild(a);
+      }
       card.appendChild(body);
       setTimeout(() => card.scrollIntoView({ behavior: 'smooth', block: 'nearest' }), 100);
       if (s5Revealed.every(Boolean)) {
