@@ -656,7 +656,12 @@
       width: 34px; height: 34px; border-radius: 50%;
       background: var(--surface-2); border: 2px solid var(--border);
       display: flex; align-items: center; justify-content: center;
-      font-size: 0.95rem; transition: all 0.3s; cursor: default;
+      font-size: 0.95rem; transition: all 0.3s; cursor: pointer;
+    }
+
+    .tl-dot:hover span {
+      border-color: var(--accent);
+      transform: scale(1.15);
     }
 
     .tl-dot.active span {
@@ -1888,25 +1893,23 @@
       const container = document.getElementById('s4Dots');
       if (!container) return;
       container.innerHTML = '';
-      S4_EVENTS.forEach(ev => {
+      S4_EVENTS.forEach((ev, i) => {
         const dot = document.createElement('div');
         dot.className = 'tl-dot';
         const span = document.createElement('span');
         span.textContent = ev.icon;
         dot.appendChild(span);
+        dot.addEventListener('click', () => s4ShowEvent(i));
         container.appendChild(dot);
       });
     }
 
-    function s4Next() {
-      s4Current++;
-      if (s4Current >= S4_EVENTS.length) { s4ShowEnd(); return; }
-
-      document.querySelectorAll('.tl-dot').forEach((d, i) => {
-        d.className = 'tl-dot' + (i === s4Current ? ' active' : i < s4Current ? ' done' : '');
+    function s4ShowEvent(i) {
+      s4Current = i;
+      document.querySelectorAll('.tl-dot').forEach((d, idx) => {
+        d.className = 'tl-dot' + (idx === i ? ' active' : idx < i ? ' done' : '');
       });
-
-      const ev = S4_EVENTS[s4Current];
+      const ev = S4_EVENTS[i];
       const card = document.getElementById('s4EventCard');
       card.style.animation = 'none';
       card.offsetHeight;
@@ -1918,9 +1921,15 @@
         '<h3 class="tl-ev-label">' + ev.label + '</h3>' +
         '<p class="tl-ev-desc">' + ev.desc + '</p>' +
         '<div class="tl-ev-wow">' + ev.wow + '</div>';
-
       const btn = document.getElementById('s4BtnNext');
-      btn.textContent = s4Current === S4_EVENTS.length - 1 ? 'לסיכום ←' : 'האירוע הבא ←';
+      btn.textContent = i === S4_EVENTS.length - 1 ? 'לסיכום ←' : 'האירוע הבא ←';
+      btn.style.display = 'block';
+    }
+
+    function s4Next() {
+      const next = s4Current + 1;
+      if (next >= S4_EVENTS.length) { s4ShowEnd(); return; }
+      s4ShowEvent(next);
     }
 
     function s4ShowEnd() {
