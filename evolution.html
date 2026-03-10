@@ -958,6 +958,29 @@
     .s2-outcome p:last-child { margin-bottom: 0; }
     .s2-outcome strong { color: var(--text); }
 
+    .s2-waiting {
+      margin-top: 1rem;
+      padding: 1.4rem;
+      border-radius: 12px;
+      border: 1px dashed var(--border);
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      animation: pulse-border 2.5s ease-in-out infinite;
+    }
+
+    .s2-waiting-icon {
+      display: block;
+      font-size: 1.6rem;
+      margin-bottom: 0.5rem;
+      opacity: 0.6;
+    }
+
+    @keyframes pulse-border {
+      0%, 100% { border-color: var(--border); }
+      50%       { border-color: var(--text-muted); }
+    }
+
     /* ── STAGE 5: ראיות ─────────────────────────────── */
     .s5-title {
       font-size: 1.8rem; font-weight: 700;
@@ -1379,6 +1402,11 @@
     <button class="btn-game-start" id="btnGameStart" onclick="s2StartRound()">התחילו לצוד!</button>
   </div>
 
+  <div class="s2-waiting" id="s2Waiting">
+    <span class="s2-waiting-icon">🔒</span>
+    <p>השלימו את ארבעת הסיבובים כדי לגלות מה קרה לאוכלוסייה</p>
+  </div>
+
   <div class="s2-outcome hidden" id="s2Outcome">
     <h3>ראיתם מה קרה? זו ברירה טבעית.</h3>
     <p>בלי לתכנן כלום — תפסתם יותר חיפושיות <strong>אדומות</strong> כי הן היו קל יותר לראות. הירוקות, שהתחפשו לסביבה, שרדו יותר. לאורך הדורות, האוכלוסייה הפכה ירוקה יותר ויותר.</p>
@@ -1765,6 +1793,8 @@
 
     function s2ShowOutcome() {
       document.getElementById('btnGameStart').style.display = 'none';
+      const waiting = document.getElementById('s2Waiting');
+      if (waiting) waiting.style.display = 'none';
       const o = document.getElementById('s2Outcome');
 
       const finalGreen = s2State.greenCount;
