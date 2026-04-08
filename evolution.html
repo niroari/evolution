@@ -1340,9 +1340,14 @@
     .pres-exit-btn:hover { border-color: #ef4444; color: #ef4444; }
 
     .pres-body { flex: 1; display: flex; flex-direction: column; overflow: hidden; }
+    .pres-body.pres-has-image { flex-direction: row; }
 
-    .pres-img-wrap { flex: 0 0 48%; overflow: hidden; }
-    .pres-img-wrap img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .pres-img-wrap {
+      flex: 0 0 46%;
+      display: flex; align-items: center; justify-content: center;
+      background: #050810; overflow: hidden;
+    }
+    .pres-img-wrap img { max-width: 100%; max-height: 100%; object-fit: contain; display: block; }
 
     .pres-icon-wrap {
       flex: 0 0 16%;
@@ -2772,7 +2777,9 @@
       }
 
       html += '</div>';
-      document.getElementById('presBody').innerHTML = html;
+      const bodyEl = document.getElementById('presBody');
+      bodyEl.className = 'pres-body' + (slide.image ? ' pres-has-image' : '');
+      bodyEl.innerHTML = html;
       presUpdateNav();
     }
   </script>
