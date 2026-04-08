@@ -1,33 +1,69 @@
-# Project: לומדות אבולוציה
+# Project: חומרי לימוד — ניר עוז-ארי
 
 ## What this is
-Interactive self-learning modules teaching middle school students about evolution,
-with no assumed prior knowledge. Each module is a standalone HTML file.
+A personal teacher portal for Nir Oz-Ari, centralizing interactive learning materials
+for all subjects taught. Each subject has its own hub page. Content is built for
+middle school students, Hebrew speakers, no assumed prior knowledge.
 
-## Target audience
-Middle school students, low-to-medium academic level, Hebrew speakers.
+## Site structure
+index.html              — teacher portal (3 subject cards: של"ח | אנגלית | העשרה)
+shelach.html            — של"ח hub: 5 workshop cards, accent #f97316
+shelach-nofadam.html    — סדנה: נופאדם (6 lessons, accordion)
+shelach-mifhaz.html     — סדנה: המהפך הציוני במישור החוף (6 lessons, accordion)
+shelach-har.html        — סדנה: ההר כערש האומה (6 lessons, accordion)
+shelach-teva.html       — סדנה: מפגש טבע בארץ ישראל (6 lessons, accordion)
+shelach-tarbuyot.html   — סדנה: מפגש תרבויות בארץ ישראל (6 lessons, accordion)
+english.html            — אנגלית hub (stub, "בקרוב"), accent #38bdf8
+enrichment.html         — העשרה hub (→ אבולוציה + future topics), accent #4ade80
+evolution-hub.html      — אבולוציה module hub (was: index.html), 4 module cards
+evolution.html          — Module 1: אבולוציה (7 stages)
+coevolution.html        — Module 2: מירוץ החימוש בטבע (5 stages)
+humanevolution.html     — Module 3: אבולוציה אנושית (5 stages)
+controversies.html      — Module 4: ויכוחים ואתגרים (5 stages)
+humanhand.jpg           — Gemini-generated: human hand bones (Module 1)
+whalehand2.jpg          — Gemini-generated: whale flipper bones (Module 1)
+fossils.jpg             — Gemini-generated: 8 labeled fossil types (Module 1, Stage 5)
+DNA.jpg                 — Gemini-generated: DNA double helix (Module 1, Stage 5)
 
-## File structure
-index.html            — hub/landing page (4 module cards, "שיעור 1–4" labels,
-                        animated background DNA emoji, glassmorphism cards)
-evolution.html        — Module 1: אבולוציה (7 stages)
-coevolution.html      — Module 2: מירוץ החימוש בטבע (5 stages)
-humanevolution.html   — Module 3: אבולוציה אנושית (5 stages)
-controversies.html    — Module 4: ויכוחים ואתגרים (5 stages)
-humanhand.jpg         — Gemini-generated: human hand bones (Module 1)
-whalehand2.jpg        — Gemini-generated: whale flipper bones (Module 1)
-fossils.jpg           — Gemini-generated: 8 labeled fossil types (Module 1, Stage 5)
-DNA.jpg               — Gemini-generated: DNA double helix (Module 1, Stage 5)
+## Navigation chain
+index.html → shelach.html / english.html / enrichment.html
+shelach.html → shelach-nofadam / shelach-mifhaz / shelach-har / shelach-teva / shelach-tarbuyot
+  each workshop page: accordion of 6 lessons, each with מצגות לשיעור + פעילויות ובחנים
+  lesson content: future HTML presentations + interactive activities (all "בקרוב" for now)
+enrichment.html → evolution-hub.html
+evolution-hub.html → evolution.html / coevolution.html / humanevolution.html / controversies.html
 
 ## Design system
 Font:         Alef (Google Fonts)
 Theme:        Dark, modern, focused
 Background:   #0d1117
-Module 1:     accent #4ade80 (green)
-Module 2:     accent #f59e0b (amber)
-Module 3:     accent #60a5fa (blue)
-Module 4:     accent #a78bfa (purple)
 Direction:    RTL, Hebrew
+
+Subject accents (portal level):
+  של"ח:    #f97316 (orange)
+  אנגלית:  #38bdf8 (sky blue)
+  העשרה:   #4ade80 (green)
+
+Module accents (evolution hub level):
+  Module 1: #4ade80 (green)
+  Module 2: #f59e0b (amber)
+  Module 3: #60a5fa (blue)
+  Module 4: #a78bfa (purple)
+
+Portal card style: background/header image per card (not emojis)
+Image sources: Pixnio preferred (Wikimedia blocks server-side fetches)
+⚠️  Portal card images pending — user to supply Pixnio URLs
+
+## Presentation mode — מצגת למורה
+- "מצגת למורה" button on hero screen of each module (modules 2–4 pending)
+- Fullscreen overlay, dark theme, module accent color
+- Layout: photo slides = image left / text right; icon slides = stacked column
+- Content reveals one item at a time on click / arrow key (PowerPoint-style)
+- Arrow ← goes back to previous slide (all items shown); ESC exits
+- Each slide: stage label, title, bullet points, optional summary (centered green), activity box, question prompt
+- Summary field renders as centered accent-colored conclusion line (not a bullet)
+- Images saved as ev-*.* in project root (ev-deeptime.png, ev-fossil.jpg, ev-finches.jpg, ev-cheetah.png, ev-skulls.png, ev-lab.png, ev-darwin.jpg)
+- Modules 2–4 presentation: TODO
 
 ## Module 1 — אבולוציה ✅ (live on Vercel)
 1. מבוא          ✅ hook question + vote + correct/wrong feedback + bone images
@@ -40,6 +76,7 @@ Direction:    RTL, Hebrew
 6. דוגמאות       ✅ 4-card gallery slider + YouTube video link per card (centered)
 7. בוחן          ✅ 6-question MCQ + Google Forms + YouTube link button
                     (name=1688849251, class=1737489614, score=2011009170)
+Presentation: ✅ 7 slides, click-to-reveal, side-by-side photo layout
 
 ## Module 2 — מירוץ החימוש בטבע ✅ (live on Vercel)
 1. מבוא          ✅ cheetah/deer vote + arms race cycle diagram
@@ -83,11 +120,14 @@ Direction:    RTL, Hebrew
 - Module 4: no video yet
 
 ## Images policy
+- No generic emojis as decorative icons — use real photos
 - Module 1: locally saved images (relative paths)
 - Module 2+: real photos linked directly from Wikimedia Commons, Pixnio, Giphy etc.
 - No Gemini-generated animal images for Module 2+
-- Always verify image URLs before using — request direct link from user if fetch fails
+- Wikimedia blocks server-side fetches (403) — always verify URLs in browser, or use Pixnio
+- Always request direct link from user if URL cannot be verified
 
 ## Git
 Repo: https://github.com/niroari/evolution
-All 4 modules live on Vercel (auto-deploy from GitHub main branch)
+Evolution modules (1–4) live on Vercel (auto-deploy from GitHub main branch)
+Portal + של"ח pages (index, shelach, shelach-*, english, enrichment, evolution-hub) built offline — not yet pushed
