@@ -1294,6 +1294,119 @@
       transition: opacity 0.2s;
     }
     .s7-video-link-btn:hover { opacity: 0.88; }
+
+    /* ── PRESENTATION MODE ──────────────────────────── */
+    .btn-pres {
+      background: transparent;
+      border: 2px solid var(--accent);
+      color: var(--accent);
+      padding: 0.6rem 2rem;
+      font-size: 1rem;
+      font-family: 'Alef', sans-serif;
+      font-weight: 700;
+      border-radius: 50px;
+      cursor: pointer;
+      transition: all 0.2s;
+      margin-top: 0.7rem;
+      display: block;
+    }
+    .btn-pres:hover { background: var(--accent); color: #0d1117; }
+
+    .pres-overlay {
+      position: fixed; inset: 0;
+      background: #090c12;
+      z-index: 9999;
+      display: flex; flex-direction: column;
+      font-family: 'Alef', sans-serif;
+      direction: rtl;
+    }
+    .pres-overlay.hidden { display: none !important; }
+
+    .pres-topbar {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0.65rem 1.5rem;
+      background: #161b27;
+      border-bottom: 2px solid var(--accent);
+      flex-shrink: 0;
+    }
+    .pres-module-label { font-size: 0.82rem; color: var(--accent); font-weight: 700; letter-spacing: 0.4px; }
+    .pres-counter { font-size: 0.88rem; color: var(--text-muted); }
+    .pres-exit-btn {
+      background: transparent; border: 1px solid var(--border);
+      color: var(--text-muted); padding: 0.3rem 0.85rem;
+      border-radius: 6px; font-family: 'Alef', sans-serif;
+      font-size: 0.82rem; cursor: pointer; transition: all 0.2s;
+    }
+    .pres-exit-btn:hover { border-color: #ef4444; color: #ef4444; }
+
+    .pres-body { flex: 1; display: flex; flex-direction: column; overflow: hidden; }
+
+    .pres-img-wrap { flex: 0 0 48%; overflow: hidden; }
+    .pres-img-wrap img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+    .pres-icon-wrap {
+      flex: 0 0 16%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 5.5rem;
+      background: radial-gradient(ellipse at 50% 50%, #0d2818 0%, #090c12 70%);
+    }
+
+    .pres-content {
+      flex: 1; padding: 1.1rem 2.5rem;
+      overflow-y: auto; display: flex; flex-direction: column;
+      justify-content: center; gap: 0.55rem;
+    }
+    .pres-stage-label { font-size: 0.75rem; color: var(--accent); font-weight: 700; letter-spacing: 0.5px; }
+    .pres-title { font-size: 2rem; font-weight: 700; color: var(--text); line-height: 1.25; }
+
+    .pres-points { list-style: none; display: flex; flex-direction: column; gap: 0.45rem; margin: 0; padding: 0; }
+    .pres-points li {
+      font-size: 1.12rem; line-height: 1.5; color: var(--text);
+      padding-right: 1.3rem; position: relative;
+    }
+    .pres-points li::before {
+      content: "◆"; color: var(--accent); position: absolute;
+      right: 0; font-size: 0.52rem; top: 0.48rem;
+    }
+
+    .pres-activity {
+      background: #0b1f0e; border: 1px solid var(--accent-dim);
+      border-right: 3px solid var(--accent);
+      border-radius: 8px; padding: 0.75rem 1rem; margin-top: 0.2rem;
+    }
+    .pres-activity-label { font-size: 0.72rem; font-weight: 700; color: var(--accent); margin-bottom: 0.3rem; }
+    .pres-activity p { font-size: 0.96rem; color: var(--text-muted); line-height: 1.6; margin: 0; }
+
+    .pres-question {
+      background: #0e1525; border: 1px solid #2a3145;
+      border-right: 3px solid #60a5fa; border-radius: 8px;
+      padding: 0.65rem 1rem; font-size: 0.9rem; color: #93c5fd; line-height: 1.5;
+    }
+    .pres-note { font-size: 0.82rem; color: var(--text-muted); font-style: italic; line-height: 1.5; }
+
+    .pres-nav-bar {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0.75rem 1.5rem;
+      background: #161b27; border-top: 1px solid var(--border);
+      flex-shrink: 0;
+    }
+    .pres-nav-btn {
+      background: var(--surface-2); border: 1px solid var(--border);
+      color: var(--text); padding: 0.5rem 1.4rem;
+      border-radius: 8px; font-family: 'Alef', sans-serif;
+      font-size: 0.95rem; font-weight: 700; cursor: pointer; transition: all 0.2s;
+    }
+    .pres-nav-btn:hover:not(:disabled) { border-color: var(--accent); color: var(--accent); }
+    .pres-nav-btn:disabled { opacity: 0.3; cursor: default; }
+    .pres-nav-btn.primary { background: var(--accent); border-color: var(--accent); color: #0d1117; }
+    .pres-nav-btn.primary:hover:not(:disabled) { opacity: 0.88; color: #0d1117; }
+
+    .pres-dots { display: flex; gap: 7px; align-items: center; }
+    .pres-dot {
+      width: 8px; height: 8px; border-radius: 50%;
+      background: var(--border); cursor: pointer; transition: all 0.2s;
+    }
+    .pres-dot.active { background: var(--accent); transform: scale(1.35); }
   </style>
 </head>
 <body>
@@ -1304,6 +1417,7 @@
     <h1>אבולוציה</h1>
     <h2>מסע קצר להבנת אחת התגליות הגדולות בהיסטוריה של המדע</h2>
     <button class="btn-start" onclick="startLearning()">בואו נתחיל</button>
+    <button class="btn-pres" onclick="presOpen()">מצגת למורה</button>
   </div>
 
   <!-- ── STAGE VIEW ── -->
@@ -2443,7 +2557,187 @@
       reveal.style.display = 'block';
       setTimeout(() => reveal.scrollIntoView({ behavior: 'smooth', block: 'nearest' }), 100);
     }
+
+    // ── PRESENTATION MODE ────────────────────────────
+    const PRES_SLIDES = [
+      {
+        stage: 'שלב 1 — מבוא',
+        title: 'האם לוויתן קרוב משפחה שלך?',
+        image: 'whalehand2.jpg',
+        imageAlt: 'עצמות סנפיר לווייתן',
+        points: [
+          '80% מהגנים של לוויתן <strong>זהים לגנים של בני אדם</strong>',
+          '5 אצבעות מוסתרות בתוך סנפיר הלוויתן — בדיוק כמו ביד שלכם',
+          'לפני 50 מיליון שנה — אבות הלוויתן הלכו על ארבע, על היבשה',
+          '<strong>אבולוציה</strong>: תהליך שבו מינים משתנים לאורך זמן ארוך מאוד'
+        ],
+        question: 'שאלו את הכיתה: מי חשב שהתשובה היא כן?'
+      },
+      {
+        stage: 'שלב 2 — ברירה טבעית',
+        title: 'ברירה טבעית — שלושה כללים',
+        icon: '🪲',
+        points: [
+          '<strong>שונות</strong> — לא כולם זהים; יש הבדלים טבעיים בין פרטים באוכלוסייה',
+          '<strong>לחץ סביבתי</strong> — לא כולם שורדים; רק חלק מגיעים להתרבות',
+          '<strong>הורשה</strong> — התכונות עוברות לצאצאים; הדור הבא דומה לשורדים',
+          'לאורך דורות — תכונות מועילות הופכות נפוצות יותר, והמין משתנה'
+        ],
+        activity: 'חלקו תלמידים לצבע ירוק ואדום (חיפושיות). המורה "צד" רק תלמידים אדומים. אחרי 3 סיבובים — מי נשאר? הצביעו עם ידיים.'
+      },
+      {
+        stage: 'שלב 3 — תורשה',
+        title: 'תורשה — איך תכונות עוברות הלאה',
+        icon: '🧬',
+        points: [
+          '<strong>גנים</strong> — הוראות הבנייה של הגוף; בכל תא קיים עותק שלם',
+          '<strong>ירושה</strong> — חצי מאבא, חצי מאמא; לכן צאצא לא זהה לאף אחד מהם',
+          '<strong>מוטציה</strong> — טעות קטנה בהעתקת הגן; יוצרת תכונה שלא הייתה קודם',
+          'בלי שונות — אין ברירה טבעית. בלי ברירה טבעית — אין אבולוציה'
+        ],
+        activity: 'כל תלמיד זורק מטבע פעמיים. ר+ר = חיפושית חומה, ר+פ = ירוקה, פ+פ = אדומה. ספרו בכיתה — כמה מכל צבע יצא?'
+      },
+      {
+        stage: 'שלב 4 — הזמן הגדול',
+        title: 'כמה זמן לוקחת אבולוציה?',
+        image: 'ev-deeptime.png',
+        imageAlt: 'קניון גרנד — שכבות סלע עתיקות',
+        points: [
+          'כדור הארץ בן <strong>4.5 מיליארד שנה</strong>',
+          'אם כל ההיסטוריה = יום אחד — בני האדם הופיעו <strong>ב-4 שניות האחרונות</strong>',
+          'אם כל ההיסטוריה = מגרש כדורגל — כל ההיסטוריה האנושית = <strong>5 סנטימטר אחרונים</strong>',
+          'אבולוציה עובדת על מיליוני דורות — לא ניתן לראות אותה בחיי אדם'
+        ]
+      },
+      {
+        stage: 'שלב 5 — ראיות',
+        title: 'מנין אנחנו יודעים?',
+        image: 'ev-fossil.jpg',
+        imageAlt: 'מאובן אמוניט בסלע',
+        points: [
+          '🦕 <strong>מאובנים</strong> — שומרים עקבות של מינים שחיו לפני מיליוני שנים',
+          '🧬 <strong>DNA משותף</strong> — ככל שמינים קרובים יותר, ה-DNA שלהם דומה יותר',
+          '🦴 <strong>מבנים שאריתיים</strong> — אפנדיקס, עצמות רגל בלוויתן, כנפיים בפינגווין',
+          '👁 <strong>אבולוציה בזמן אמת</strong> — חיידקים מפתחים עמידות לאנטיביוטיקה תוך שנים'
+        ]
+      },
+      {
+        stage: 'שלב 6 — דוגמאות',
+        title: 'אבולוציה בפעולה',
+        image: 'ev-finches.jpg',
+        imageAlt: 'ציפורי דרווין — השוואת מקורים',
+        points: [
+          '🐦 <strong>ציפורי דרווין</strong> — מין אחד, 14 מינים שונים; כל מקור מותאם למזון אחר',
+          '🐕 <strong>כלבים</strong> — 400 גזעים שונים, כולם מגיעים מזאב אחד, תוך 15,000 שנה',
+          '🐋 <strong>לוויתן</strong> — ממהלך ביבשה לשחייה בים; עצמות הרגל עדיין נמצאות בגוף',
+          '🦠 <strong>חיידקים</strong> — מפתחים עמידות לאנטיביוטיקה — אנחנו רואים את זה קורה היום'
+        ]
+      },
+      {
+        stage: 'שלב 7 — בוחן',
+        title: 'בוחן מסכם',
+        icon: '🏆',
+        points: [
+          '6 שאלות רב-ברירה — כל החומר שלמדנו',
+          'הגישו ב-Google Forms — תוצאות אצלכם בזמן אמת',
+          'בסיום: סרטון סיכום ב-YouTube'
+        ],
+        note: 'הפנו את התלמידים לאתר ולחצו יחד על "בוחן מסכם"'
+      }
+    ];
+
+    let presCurrent = 0;
+
+    function presOpen() {
+      presCurrent = 0;
+      document.getElementById('presOverlay').classList.remove('hidden');
+      presRender();
+      document.addEventListener('keydown', presKeyHandler);
+    }
+
+    function presExit() {
+      document.getElementById('presOverlay').classList.add('hidden');
+      document.removeEventListener('keydown', presKeyHandler);
+    }
+
+    function presKeyHandler(e) {
+      if (e.key === 'ArrowLeft'  || e.key === 'ArrowDown')  presNav(1);
+      if (e.key === 'ArrowRight' || e.key === 'ArrowUp')    presNav(-1);
+      if (e.key === 'Escape') presExit();
+    }
+
+    function presNav(dir) {
+      const next = presCurrent + dir;
+      if (next < 0 || next >= PRES_SLIDES.length) return;
+      presCurrent = next;
+      presRender();
+    }
+
+    function presRender() {
+      const slide = PRES_SLIDES[presCurrent];
+      const total = PRES_SLIDES.length;
+
+      document.getElementById('presCounter').textContent = (presCurrent + 1) + ' / ' + total;
+
+      const prevBtn = document.getElementById('presBtnPrev');
+      const nextBtn = document.getElementById('presBtnNext');
+      prevBtn.disabled = presCurrent === 0;
+      const isLast = presCurrent === total - 1;
+      nextBtn.textContent = isLast ? 'סיום' : 'הבא ←';
+      nextBtn.onclick = isLast ? presExit : () => presNav(1);
+
+      const dots = document.getElementById('presDots');
+      dots.innerHTML = '';
+      for (let i = 0; i < total; i++) {
+        const d = document.createElement('div');
+        d.className = 'pres-dot' + (i === presCurrent ? ' active' : '');
+        d.onclick = () => { presCurrent = i; presRender(); };
+        dots.appendChild(d);
+      }
+
+      let html = '';
+      if (slide.image) {
+        html += '<div class="pres-img-wrap"><img src="' + slide.image + '" alt="' + slide.imageAlt + '" /></div>';
+      } else if (slide.icon) {
+        html += '<div class="pres-icon-wrap">' + slide.icon + '</div>';
+      }
+
+      html += '<div class="pres-content">';
+      html += '<div class="pres-stage-label">' + slide.stage + '</div>';
+      html += '<div class="pres-title">' + slide.title + '</div>';
+      html += '<ul class="pres-points">';
+      slide.points.forEach(function(p) { html += '<li>' + p + '</li>'; });
+      html += '</ul>';
+
+      if (slide.question) {
+        html += '<div class="pres-question">💬 ' + slide.question + '</div>';
+      }
+      if (slide.activity) {
+        html += '<div class="pres-activity"><div class="pres-activity-label">פעילות כיתתית</div><p>' + slide.activity + '</p></div>';
+      }
+      if (slide.note) {
+        html += '<p class="pres-note">📌 ' + slide.note + '</p>';
+      }
+      html += '</div>';
+
+      document.getElementById('presBody').innerHTML = html;
+    }
   </script>
+
+  <!-- ── PRESENTATION OVERLAY ── -->
+  <div class="pres-overlay hidden" id="presOverlay">
+    <div class="pres-topbar">
+      <div class="pres-module-label">אבולוציה — מצגת למורה</div>
+      <div class="pres-counter" id="presCounter">1 / 7</div>
+      <button class="pres-exit-btn" onclick="presExit()">✕ יציאה</button>
+    </div>
+    <div class="pres-body" id="presBody"></div>
+    <div class="pres-nav-bar">
+      <button class="pres-nav-btn" id="presBtnPrev" onclick="presNav(-1)">→ הקודם</button>
+      <div class="pres-dots" id="presDots"></div>
+      <button class="pres-nav-btn primary" id="presBtnNext" onclick="presNav(1)">הבא ←</button>
+    </div>
+  </div>
 
 </body>
 </html>
