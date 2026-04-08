@@ -1407,6 +1407,16 @@
       background: var(--border); cursor: pointer; transition: all 0.2s;
     }
     .pres-dot.active { background: var(--accent); transform: scale(1.35); }
+
+    .pres-item {
+      opacity: 0;
+      transform: translateY(10px);
+      transition: opacity 0.32s ease, transform 0.32s ease;
+    }
+    .pres-item.pres-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
   </style>
 </head>
 <body>
@@ -2647,9 +2657,19 @@
     ];
 
     let presCurrent = 0;
+    let presReveal = 0;
+
+    function presItemCount(slide) {
+      let n = slide.points.length;
+      if (slide.question) n++;
+      if (slide.activity) n++;
+      if (slide.note) n++;
+      return n;
+    }
 
     function presOpen() {
       presCurrent = 0;
+      presReveal = 0;
       document.getElementById('presOverlay').classList.remove('hidden');
       presRender();
       document.addEventListener('keydown', presKeyHandler);
@@ -2661,16 +2681,43 @@
     }
 
     function presKeyHandler(e) {
-      if (e.key === 'ArrowLeft'  || e.key === 'ArrowDown')  presNav(1);
-      if (e.key === 'ArrowRight' || e.key === 'ArrowUp')    presNav(-1);
+      if (e.key === 'ArrowLeft' || e.key === 'ArrowDown')  presForward();
+      if (e.key === 'ArrowRight' || e.key === 'ArrowUp')   presBack();
       if (e.key === 'Escape') presExit();
     }
 
-    function presNav(dir) {
-      const next = presCurrent + dir;
-      if (next < 0 || next >= PRES_SLIDES.length) return;
-      presCurrent = next;
+    function presForward() {
+      const slide = PRES_SLIDES[presCurrent];
+      const total = presItemCount(slide);
+      if (presReveal < total) {
+        // reveal next item in place (no full re-render)
+        const items = document.querySelectorAll('#presBody .pres-item');
+        if (items[presReveal]) items[presReveal].classList.add('pres-visible');
+        presReveal++;
+        presUpdateNav();
+      } else if (presCurrent < PRES_SLIDES.length - 1) {
+        presCurrent++;
+        presReveal = 0;
+        presRender();
+      } else {
+        presExit();
+      }
+    }
+
+    function presBack() {
+      if (presCurrent === 0) return;
+      presCurrent--;
+      presReveal = presItemCount(PRES_SLIDES[presCurrent]); // show all on prev slide
       presRender();
+    }
+
+    function presUpdateNav() {
+      const slide = PRES_SLIDES[presCurrent];
+      const allShown = presReveal >= presItemCount(slide);
+      const isLastSlide = presCurrent === PRES_SLIDES.length - 1;
+      const nextBtn = document.getElementById('presBtnNext');
+      nextBtn.textContent = (isLastSlide && allShown) ? 'סיום' : 'הבא ←';
+      document.getElementById('presBtnPrev').disabled = presCurrent === 0;
     }
 
     function presRender() {
@@ -2679,19 +2726,12 @@
 
       document.getElementById('presCounter').textContent = (presCurrent + 1) + ' / ' + total;
 
-      const prevBtn = document.getElementById('presBtnPrev');
-      const nextBtn = document.getElementById('presBtnNext');
-      prevBtn.disabled = presCurrent === 0;
-      const isLast = presCurrent === total - 1;
-      nextBtn.textContent = isLast ? 'סיום' : 'הבא ←';
-      nextBtn.onclick = isLast ? presExit : () => presNav(1);
-
       const dots = document.getElementById('presDots');
       dots.innerHTML = '';
       for (let i = 0; i < total; i++) {
         const d = document.createElement('div');
         d.className = 'pres-dot' + (i === presCurrent ? ' active' : '');
-        d.onclick = () => { presCurrent = i; presRender(); };
+        (function(idx) { d.onclick = function() { presCurrent = idx; presReveal = 0; presRender(); }; })(i);
         dots.appendChild(d);
       }
 
@@ -2705,22 +2745,35 @@
       html += '<div class="pres-content">';
       html += '<div class="pres-stage-label">' + slide.stage + '</div>';
       html += '<div class="pres-title">' + slide.title + '</div>';
+
+      let idx = 0;
       html += '<ul class="pres-points">';
-      slide.points.forEach(function(p) { html += '<li>' + p + '</li>'; });
+      slide.points.forEach(function(p) {
+        const vis = idx < presReveal ? ' pres-visible' : '';
+        html += '<li class="pres-item' + vis + '">' + p + '</li>';
+        idx++;
+      });
       html += '</ul>';
 
       if (slide.question) {
-        html += '<div class="pres-question">💬 ' + slide.question + '</div>';
+        const vis = idx < presReveal ? ' pres-visible' : '';
+        html += '<div class="pres-question pres-item' + vis + '">💬 ' + slide.question + '</div>';
+        idx++;
       }
       if (slide.activity) {
-        html += '<div class="pres-activity"><div class="pres-activity-label">פעילות כיתתית</div><p>' + slide.activity + '</p></div>';
+        const vis = idx < presReveal ? ' pres-visible' : '';
+        html += '<div class="pres-activity pres-item' + vis + '"><div class="pres-activity-label">פעילות כיתתית</div><p>' + slide.activity + '</p></div>';
+        idx++;
       }
       if (slide.note) {
-        html += '<p class="pres-note">📌 ' + slide.note + '</p>';
+        const vis = idx < presReveal ? ' pres-visible' : '';
+        html += '<p class="pres-note pres-item' + vis + '">📌 ' + slide.note + '</p>';
+        idx++;
       }
-      html += '</div>';
 
+      html += '</div>';
       document.getElementById('presBody').innerHTML = html;
+      presUpdateNav();
     }
   </script>
 
@@ -2733,9 +2786,9 @@
     </div>
     <div class="pres-body" id="presBody"></div>
     <div class="pres-nav-bar">
-      <button class="pres-nav-btn" id="presBtnPrev" onclick="presNav(-1)">→ הקודם</button>
+      <button class="pres-nav-btn" id="presBtnPrev" onclick="presBack()">→ הקודם</button>
       <div class="pres-dots" id="presDots"></div>
-      <button class="pres-nav-btn primary" id="presBtnNext" onclick="presNav(1)">הבא ←</button>
+      <button class="pres-nav-btn primary" id="presBtnNext" onclick="presForward()">הבא ←</button>
     </div>
   </div>
 
