@@ -1389,6 +1389,17 @@
     }
     .pres-note { font-size: 0.82rem; color: var(--text-muted); font-style: italic; line-height: 1.5; }
 
+    .pres-summary {
+      text-align: center;
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--accent);
+      padding: 0.8rem 1rem;
+      border-top: 1px solid var(--accent-dim);
+      margin-top: 0.4rem;
+      line-height: 1.5;
+    }
+
     .pres-nav-bar {
       display: flex; align-items: center; justify-content: space-between;
       padding: 0.75rem 1.5rem;
@@ -2595,9 +2606,9 @@
         points: [
           '<strong>שונות</strong> — לא כולם זהים; יש הבדלים טבעיים בין פרטים באוכלוסייה',
           '<strong>לחץ סביבתי</strong> — לא כולם שורדים; רק חלק מגיעים להתרבות',
-          '<strong>הורשה</strong> — התכונות עוברות לצאצאים; הדור הבא דומה לשורדים',
-          'לאורך דורות — תכונות מועילות הופכות נפוצות יותר, והמין משתנה'
+          '<strong>הורשה</strong> — התכונות עוברות לצאצאים; הדור הבא דומה לשורדים'
         ],
+        summary: 'לאורך דורות — תכונות מועילות הופכות נפוצות יותר, והמין משתנה',
         activity: 'חלקו תלמידים לצבע ירוק ואדום (חיפושיות). המורה "צד" רק תלמידים אדומים. אחרי 3 סיבובים — מי נשאר? הצביעו עם ידיים.'
       },
       {
@@ -2666,6 +2677,7 @@
 
     function presItemCount(slide) {
       let n = slide.points.length;
+      if (slide.summary)  n++;
       if (slide.question) n++;
       if (slide.activity) n++;
       if (slide.note) n++;
@@ -2760,6 +2772,11 @@
       });
       html += '</ul>';
 
+      if (slide.summary) {
+        const vis = idx < presReveal ? ' pres-visible' : '';
+        html += '<div class="pres-summary pres-item' + vis + '">' + slide.summary + '</div>';
+        idx++;
+      }
       if (slide.question) {
         const vis = idx < presReveal ? ' pres-visible' : '';
         html += '<div class="pres-question pres-item' + vis + '">💬 ' + slide.question + '</div>';
